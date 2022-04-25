@@ -23,7 +23,7 @@ class CreateCharactersTable extends Migration
             $table->json('origin');
             $table->json('location');
             $table->string('image');
-            $table->string('episodes');
+            $table->json('episodes');
             $table->string('url');
             $table->timestamps();
         });
