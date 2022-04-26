@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Http\Resources\LocationResource;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -10,11 +11,11 @@ class LocationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        //
+        return LocationResource::collection(Location::all());
     }
 
     /**

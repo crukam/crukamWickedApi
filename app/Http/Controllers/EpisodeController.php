@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Episode;
 use Illuminate\Http\Request;
+use App\Http\Resources\EpisodeResource;
 
 class EpisodeController extends Controller
 {
@@ -14,14 +15,14 @@ class EpisodeController extends Controller
      */
     public function index()
     {
-        //
+       return EpisodeResource::collection(Episode::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Json\AnonymousResourceCollection
      */
     public function store(Request $request)
     {

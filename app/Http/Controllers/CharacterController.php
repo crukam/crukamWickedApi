@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use Illuminate\Http\Request;
+use App\Http\Resources\CharacterResource;
 
 class CharacterController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        //
+        return CharacterResource::collection(Character::all());
     }
 
     /**
