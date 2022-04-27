@@ -15,7 +15,7 @@ class EpisodeController extends Controller
      */
     public function index()
     {
-       return EpisodeResource::collection(Episode::all());
+       return EpisodeResource::collection(Episode::paginate(5));
     }
 
     /**
