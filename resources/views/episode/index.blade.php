@@ -4,7 +4,7 @@
 <div class="row">
       <div class="medium-12 large-12 columns">
         <h4>episodes</h4>
-        <div class="medium-2  columns"><a class="button hollow success" href="{{ route('episode_edit') }}">ADD NEW episode</a></div>
+       
 
         
         <table class="stack">
@@ -24,7 +24,15 @@
                     <td>{{ $episode->air_date }}</td>
                     <td>
                       <a class="hollow button" href="{{ route('episode_show', [$episode->id ]) }}">SHOW</a>
-                      <a class="hollow button" href="">CHARACTERS</a>
+                    </td>
+                    <td>
+                    <form action ="{{ route('episodes.destroy', $episode->id) }}" method ="POST">
+                        @csrf
+                        @method("DELETE")
+                        <div class="form-item center">
+                          <button type="submit" class=" hollow button btn-danger">Delete</button>
+                        </div>
+                      </form>
                     </td>
                   </tr>
               @endforeach

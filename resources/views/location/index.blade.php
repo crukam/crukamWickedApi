@@ -4,7 +4,7 @@
 <div class="row">
       <div class="medium-12 large-12 columns">
         <h4>locations</h4>
-        <div class="medium-2  columns"><a class="button hollow success" href="{{ route('location_edit') }}">ADD NEW location</a></div>
+        
 
         
         <table class="stack">
@@ -24,7 +24,16 @@
                     <td>{{ $location->dimension }}</td>
                     <td>
                       <a class="hollow button" href="{{ route('location_show', [$location->id ]) }}">SHOW</a>
-                      <a class="hollow button" href="">RESIDENTS</a>
+                      
+                    </td>
+                    <td>
+                    <form action ="{{ route('locations.destroy', $location->id) }}" method ="POST">
+                        @csrf
+                        @method("DELETE")
+                        <div class="form-item center">
+                          <button type="submit" class=" hollow button btn-danger">Delete</button>
+                        </div>
+                      </form>
                     </td>
                   </tr>
               @endforeach

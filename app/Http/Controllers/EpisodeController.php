@@ -60,6 +60,7 @@ class EpisodeController extends Controller
      */
     public function destroy(Episode $episode)
     {
-        //
+        $episode->delete();
+        return redirect('/')->with('success', 'episode deleted');
     }
 }

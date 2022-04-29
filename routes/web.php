@@ -20,22 +20,32 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/character', function () {
-    $jsonResponse = json_decode(file_get_contents(env('APP_URL').'/api/characters', true));
+    $jsonResponse = json_decode(file_get_contents(url('/').'/api/characters', true));
     $data['characters'] = $jsonResponse->data;
-    $data['links'] = $jsonResponse->meta->links;
+    $data['links'] = $jsonResponse->links;
     return view('/character/index', $data);
 })->name('characters');
 
-Route::get('/character/{character}', function () {
-    return view('/character/show');
-})->name('character_show');
+Route::get('/characters/show/{character}', function($character) {
+    $jsonResponse = json_decode(file_get_contents(url('/').'/api/characters/'.$character, true));
+    $data['character'] = $jsonResponse->data;
+    $data['origin'] = json_decode($jsonResponse->data->origin)->name;
+    $data['location'] = json_decode($jsonResponse->data->location)->name;
+    return view('/character/show', $data);
+})->name('characters.show');
 
-Route::get('/character/edit', function () {
-    return view('/character/edit');
-})->name('character_edit');
+Route::delete('/characters/{character}', [\App\Http\Controllers\CharacterController::class, 'destroy'])
+  ->name('characters.destroy');
+
+Route::delete('/locations/{location}', [\App\Http\Controllers\LocationController::class, 'destroy'])
+  ->name('locations.destroy');
+
+Route::delete('/episodes/{episode}', [\App\Http\Controllers\EpisodeController::class, 'destroy'])
+  ->name('episodes.destroy');
+
 
 Route::get('/location', function () {
-    $jsonResponse = json_decode(file_get_contents(env('APP_URL').'/api/locations', true));
+    $jsonResponse = json_decode(file_get_contents(url('/').'/api/locations', true));
     $data['locations'] = $jsonResponse->data;
     $data['links'] = $jsonResponse->meta->links;
     return view('/location/index', $data);
@@ -46,12 +56,10 @@ Route::get('/location/{location}', function () {
     return view('/location/show');
 })->name('location_show');
 
-Route::get('/location/edit', function () {
-    return view('/location/edit');
-})->name('location_edit');
+
 
 Route::get('/episode', function () {
-    $jsonResponse = json_decode(file_get_contents(env('APP_URL').'/api/episodes', true));
+    $jsonResponse = json_decode(file_get_contents(url('/').'/api/episodes', true));
     $data['episodes'] = $jsonResponse->data;
     $data['links'] = $jsonResponse->meta->links;
     return view('/episode/index', $data);

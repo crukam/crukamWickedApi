@@ -23,10 +23,22 @@
                 <td>App\Http\Controllers\CharacterController@index </td>
            </tr>
             <tr>
-                <td>GET|HEAD</td>
+                <td>DELETE</td>
                 <td>api/characters/{character}</td>
-                <td>characters.show </td>
-                <td>App\Http\Controllers\CharacterController@show </td>
+                <td>characters.destroy </td>
+                <td>App\Http\Controllers\CharacterController@destroy </td>
+            </tr>
+            <tr>
+                <td> GET|HEAD</td>
+                <td> api/episodes/{episode} </td>
+                <td>episodes.show </td>
+                <td>App\Http\Controllers\EpisodeController@show </td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td>api/episodes/{episode}</td>
+                <td>episodes.destroy </td>
+                <td>App\Http\Controllers\EpisodeController@destroy </td>
             </tr>
             <tr>
                 <td>GET|HEAD</td>
@@ -47,14 +59,33 @@
                 <td>App\Http\Controllers\EpisodeController@index </td>
             </tr>
             <tr>
-                <td>GET|HEAD</td>
-                <td>api/Episodes/{location}</td>
-                <td>Episodes.show </td>
-                <td>App\Http\Controllers\EpisodeController@show </td>
+                <td>DELETE</td>
+                <td>api/locations/{location}</td>
+                <td>locations.destroy </td>
+                <td>App\Http\Controllers\locationController@destroy </td>
             </tr>
         </table>
-        
+        @if (session('success'))
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Sucess Message</h5>
+                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>{{ session('success') }}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal"></button>
+                  <button type="button" class="btn btn-primary"></button>
+                </div>
+              </div>
+            </div>
+        </div>
+        @endif
         
       </div>
     </div>
+   
 @endsection

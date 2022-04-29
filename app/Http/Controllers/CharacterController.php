@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Character;
 use Illuminate\Http\Request;
 use App\Http\Resources\CharacterResource;
+use App\Http\Resources\EpisodeResource;
 
 class CharacterController extends Controller
 {
@@ -15,7 +16,8 @@ class CharacterController extends Controller
      */
     public function index()
     {
-        return CharacterResource::collection(Character::paginate(5));
+        //return CharacterResource::collection(Character::paginate(5));
+        return response()->json( new CharacterResource(Character::paginate(5)), 200);
     }
 
     /**
@@ -37,7 +39,7 @@ class CharacterController extends Controller
      */
     public function show(Character $character)
     {
-        //
+        return new CharacterResource($character);
     }
 
     /**
@@ -60,6 +62,9 @@ class CharacterController extends Controller
      */
     public function destroy(Character $character)
     {
-        //
+        $character->delete();
+        return redirect('/')->with('success', 'Character deleted');
     }
+
+    
 }

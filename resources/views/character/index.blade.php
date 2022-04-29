@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="row">
       <div class="medium-12 large-12 columns">
         <h4>Characters</h4>
-        <div class="medium-2  columns"><a class="button hollow success" href="{{ route('character_edit') }}">ADD NEW CHARACTER</a></div>
+        
+          
 
         
         <table class="stack">
@@ -13,6 +15,8 @@
               <th width="200">image</th>
               <th width="200">Name</th>
               <th width="200">Status</th>
+              <th width="200">Episodes</th>
+              <th width="200">Details</th>
             </tr>
           </thead>
           <tbody>
@@ -23,8 +27,16 @@
                     <td>{{ $character->name }}</td>
                     <td>{{ $character->status }}</td>
                     <td>
-                      <a class="hollow button" href="{{ route('character_show', [$character->id ]) }}">SHOW</a>
-                      <a class="hollow button" href="">EPISODES</a>
+                     <a class="hollow button" href="{{ route('characters.show',['character' => $character->id]) }}">SHOW</a>
+                    </td>
+                    <td>
+                     <form action ="{{ route('characters.destroy', $character->id) }}" method ="POST">
+                        @csrf
+                        @method("DELETE")
+                        <div class="form-item center">
+                          <button type="submit" class=" hollow button btn-danger">Delete</button>
+                        </div>
+                      </form>  
                     </td>
                   </tr>
               @endforeach
