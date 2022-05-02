@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+// the copy or upload shebang
+//$copy = copy( $fb_avatar_url, $local_avatar_url, stream_context_create( $contextOptions ) );
+
 Route::get('/', function () {
     $data = [];
     $data['version'] = '0.1.1';
@@ -20,7 +25,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/character', function () {
-    $jsonResponse = json_decode(file_get_contents(url('/').'/api/characters', true));
+    $jsonResponse = json_decode(file_get_contents(url('/').'/api/characters', false));
     $data['characters'] = $jsonResponse->data;
     $data['links'] = $jsonResponse->links;
     return view('/character/index', $data);
@@ -72,3 +77,20 @@ Route::get('/episode/edit', function () {
 Route::get('/episode/{episode}', function () {
     return view('/episode/show');
 })->name('episode_show');
+
+Route::get('/characters/page/{page}', function ($page) {
+    $data['characters'] = json_decode(file_get_contents(url('/').'/api/characters?page='.$page, true))->data;
+    return view('/character/currentpage', $data);
+})->name('currentCharacter_page');
+
+Route::get('/locations/page/{page}', function ($page) {
+    $data['locations'] = json_decode(file_get_contents(url('/').'/api/locations?page='.$page, true))->data;
+    return view('/location/currentpage', $data);
+})->name('currentLocation_page');
+
+Route::get('/episodes/page/{page}', function ($page) {
+    $data['episodes'] = json_decode(file_get_contents(url('/').'/api/episodes?page='.$page, true))->data;
+    return view('/episode/currentpage', $data);
+})->name('currentEpisode_page');
+
+

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="row">
       <div class="medium-12 large-12 columns">
         <h4>Characters</h4>
@@ -42,17 +41,4 @@
               @endforeach
           </tbody>
         </table>
-        <h5>Pagination:</h5>
-   
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-               @foreach($links as $link)
-
-                  <li class="page-item"><a class="page-link" href= "{{ route('currentCharacter_page', ['page' => $link->label])}}">{{html_entity_decode($link->label)}}</a></li>
-                @endforeach
-                
-              </ul>
-            </nav>
-      </div>
-    </div>
 @endsection

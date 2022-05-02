@@ -44,7 +44,7 @@
             <nav aria-label="Page navigation example">
               <ul class="pagination">
                 @foreach($links as $link)
-                  <li class="page-item"><a class="page-link" href= "{{$link->url}}">{{$link->label}}</a></li>
+                  <li class="page-item"><a class="page-link" href= "{{ route('currentLocation_page', ['page' => $link->label]) }}">{{html_entity_decode($link->label)}}</a></li>
                 @endforeach
                 
               </ul>

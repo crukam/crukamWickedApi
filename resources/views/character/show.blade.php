@@ -40,7 +40,7 @@
                  </tr>
                  <tr>
                     <td>origin</td> 
-                    <td><{{ $origin }}></td>
+                    <td><{{ json_decode($character->origin)->name }}></td>
                  </tr>
                  <tr>
                     <td>location</td> 
